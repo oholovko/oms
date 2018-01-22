@@ -10,7 +10,7 @@ deploy:
   secret_access_key:
     secure: QE82Vy0rpIle+cbVAR4lR9V9v7f5XV0odwVVeQmMziYW85Wg7NHhE8jfjBB7rKxe69AGBdA+YSpHwWb3XFatYBpv8e1Lp+dxQLidO5SoVZZ4qePWoAjeAUr/7bbwSX2ssNk54JeT/4XLZWHr4S0rMOl8QyCX4V/eJIFtRb4sD+VbejkZFWFAOrGrujZfHVCII7OPyQWxErwW+rNKAdOXO/Ra4R+H9TbnDNnMfJUyxtvP++uVv4019dxCajiCWx3IIcf1OlLqcYxhjVAxf3eXtP0OPyxwqQbLbnAdvIEUkil9HlSzAR++W6nnIBozsSoMhW8bxf7qUFokGIwLx67qZ1uZMSfHMlcaEo1u63WzFloq4Pm+AkCG+KsSsqIQo22ZEMG0gm6qVSFbl1jMgzvyP8uIZ7IW1rmWDwVEYb+VD29EMz8Y+wozSzQM4CiQBnKZMMtEZmPCjzAH64jWuKpUqpKboVbgqjVoaxKljYSPzhJ6UnNrgGMNZUAW7r5p/FPpA4zKu6o5HsWpixKY9E2hNevcgdq0Bn1csuz8xlZa9XeMChH+VGiNurfOGfra50zR05tU4keKdxLK3t+qRwDsra7IOXdUNmI9d1m6M3bB+caxpxLLiJK1ivclKgOwDJiqWl5mdWaPbYciRYQgtXFmtCzJl8W9rOyhjcF/o1Ns2rw=
   bucket: "lv285oms"
-  upload-dir: target
+  upload-dir: oms
   acl: bucket_owner_full_control
   on:
     repo: oholovko/oms
