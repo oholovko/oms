@@ -4,11 +4,16 @@ jdk:
 - oraclejdk8
 script:
 - mvn clean install
-deploy:
-  - provider: s3
-    access_key_id: AWS_ACCESS_KEY_ID
-    secret_access_key: AWS_SECRET_KEY
-    bucket: "arn:aws:s3:::lv285oms"
 env:
   global:
     secure: iKU3WrhrvEiwAsYdZuFAP06GeiTFaXQsVdbAAFq6n8RrFc/MTzsytz5ZDhwO8gbTT0bEJDV8PWoeBdkiXfxKQYQi2rr+I5qqLVWd5Y+nBTEub5K9WaxYdSQsGMcjWYDUNYDpNNa/6uGeUqIs/tlPsOx5smyqaggAirz4+eH2NAh1cG8X62G/ddnnRTP9HrlfJDlP4/cmr6tfRPitJapk8X2tEtLkUzueBvzFqP4SXXhJ3OIxeAc3H903Y63USCYD2rIuWK0pq4Nck0TDK1JMjv7gSQ8zVRfGxui/cVAXsoeBaL3e+XQLajWNgBsG8fyANvv+hy6iFBvCAMKBylNqiW7efKBqRTyqESw+olHPSfuOPMA2BWeKPpUu2BWEYPDU2XnaaIKKto21T6tmQChoUY9FKJhWpZ/jkjLqGCPvH3O2ssgqeHqI5sugSyZkEEiCH40W03ISo2YcnVl7sfceKcV4vbebgnPeC4iB2Lz1ppvXkToCFH4PcEzTCy6VxiGu2L2mzaUuEDOuk7Ueyj1AGb5sgGoTm5ukMup8wJRUMeAQfvsZ7dPT6zFg2KiDiu3vat4lZ5y/dODYqWyrBrw2OMOw4AncXuswTdOX8DdYfdlGC8U8M0hCDQxa8GEOAoQFHBJrCleOkR36JkyA6jbEu5XHOiJ+EtrWDdI0ZXZSlWU=
+deploy:
+  provider: s3
+  access_key_id: AKIAJTNAO3GPLU3O3RMA
+  secret_access_key:
+    secure: QE82Vy0rpIle+cbVAR4lR9V9v7f5XV0odwVVeQmMziYW85Wg7NHhE8jfjBB7rKxe69AGBdA+YSpHwWb3XFatYBpv8e1Lp+dxQLidO5SoVZZ4qePWoAjeAUr/7bbwSX2ssNk54JeT/4XLZWHr4S0rMOl8QyCX4V/eJIFtRb4sD+VbejkZFWFAOrGrujZfHVCII7OPyQWxErwW+rNKAdOXO/Ra4R+H9TbnDNnMfJUyxtvP++uVv4019dxCajiCWx3IIcf1OlLqcYxhjVAxf3eXtP0OPyxwqQbLbnAdvIEUkil9HlSzAR++W6nnIBozsSoMhW8bxf7qUFokGIwLx67qZ1uZMSfHMlcaEo1u63WzFloq4Pm+AkCG+KsSsqIQo22ZEMG0gm6qVSFbl1jMgzvyP8uIZ7IW1rmWDwVEYb+VD29EMz8Y+wozSzQM4CiQBnKZMMtEZmPCjzAH64jWuKpUqpKboVbgqjVoaxKljYSPzhJ6UnNrgGMNZUAW7r5p/FPpA4zKu6o5HsWpixKY9E2hNevcgdq0Bn1csuz8xlZa9XeMChH+VGiNurfOGfra50zR05tU4keKdxLK3t+qRwDsra7IOXdUNmI9d1m6M3bB+caxpxLLiJK1ivclKgOwDJiqWl5mdWaPbYciRYQgtXFmtCzJl8W9rOyhjcF/o1Ns2rw=
+  bucket: arn:aws:s3:::lv285oms
+  upload-dir: lv285oms
+  acl: bucket_owner_full_control
+  on:
+    repo: oholovko/oms
