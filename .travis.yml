@@ -1,11 +1,12 @@
 # Version: 0.0.1
-language: java, python
+language: java
 # sudo: false
 sudo: required
 services:
   - docker
 jdk:
   - oraclejdk8
+language: python
 python:
   - "3.5"
 script:
@@ -25,7 +26,7 @@ script:
 after_success:
   - docker --version
  # Do AWS login for ECR.
-  # language: python
+  # 
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
   - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
