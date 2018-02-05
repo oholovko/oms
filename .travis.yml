@@ -1,5 +1,8 @@
 language: java
-sudo: false
+# sudo: false
+sudo: required
+services:
+  - docker
 jdk:
   - oraclejdk8
 script:
@@ -17,8 +20,5 @@ script:
 #   on:
 #     repo: oholovko/oms
 after_success:
-  sudo: required
-  services:
-    - docker
-  before_deploy:
+
     - docker --version
