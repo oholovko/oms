@@ -1,8 +1,5 @@
-sudo: required
-dist: trusty
 language: java
-services:
-    - docker
+sudo: false
 jdk:
 - oraclejdk8
 script:
@@ -19,7 +16,11 @@ script:
   # acl: bucket_owner_full_control
   # on:
   #   repo: oholovko/oms
-
 before_script:
+  sudo: required
+  dist: trusty
+  services:
+    - docker
+script:
   - docker pull tomcat:8.0-jre8 || true
   - docker images
