@@ -20,5 +20,7 @@ script:
 #   on:
 #     repo: oholovko/oms
 after_success:
+  - docker --version
+ # Do AWS login for ECR.
+  - pip install --user awscli
 
-    - docker --version
