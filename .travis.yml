@@ -19,7 +19,7 @@ script:
   # acl: bucket_owner_full_control
   # on:
   #   repo: oholovko/oms
-after_success:
 
-script:
-  - docker pull tomcat:8.0-jre8
+before_script:
+  - docker pull tomcat:8.0-jre8 || true
+  - docker images
