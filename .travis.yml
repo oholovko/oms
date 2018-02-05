@@ -1,8 +1,12 @@
+sudo: required
+dist: trusty
 language: java
-sudo: false
+# sudo: false
 jdk:
 - oraclejdk8
-script:
+services:
+  - docker
+build-oms:
 #- mvn clean install
 - mvn clean package
 # deploy:
@@ -16,11 +20,6 @@ script:
   # acl: bucket_owner_full_control
   # on:
   #   repo: oholovko/oms
-before_script:
-  sudo: required
-  dist: trusty
-  services:
-    - docker
-script:
+docker:
   - docker pull tomcat:8.0-jre8 || true
   - docker images
