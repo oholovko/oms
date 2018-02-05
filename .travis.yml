@@ -1,11 +1,10 @@
-build:
-  language: java
-  sudo: false
-  jdk:
-    - oraclejdk8
+language: java
+sudo: false
+jdk:
+- oraclejdk8
 script:
-  #- mvn clean install
-  - mvn clean package
+#- mvn clean install
+- mvn clean package
 # deploy:
   # provider: s3
   # access_key_id: AKIAJTNAO3GPLU3O3RMA
