@@ -31,3 +31,5 @@ after_success:
   - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
   - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
   - $(aws ecr get-login --no-include-email --region us-east-2)
+  - docker tag oms-web 851151705021.dkr.ecr.us-east-2.amazonaws.com/repo:latest
+  - docker push 851151705021.dkr.ecr.us-east-2.amazonaws.com/repo:latest
