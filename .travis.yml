@@ -1,13 +1,11 @@
-language: java
-# sudo: false
-sudo: required
-services:
-  - docker
-jdk:
-- oraclejdk8
-script:
-#- mvn clean install
-- mvn clean package
+build:
+  - language: java
+  - sudo: false
+  - jdk:
+    - oraclejdk8
+  - script:
+    #- mvn clean install
+    - mvn clean package
 # deploy:
   # provider: s3
   # access_key_id: AKIAJTNAO3GPLU3O3RMA
@@ -20,4 +18,8 @@ script:
   # on:
   #   repo: oholovko/oms
 after_success:
-  docker pull tomcat:8.0-jre8
+  - sudo: required
+  - services:
+    - docker
+script:
+  - docker pull tomcat:8.0-jre8
