@@ -25,6 +25,7 @@ after_success:
   # language: python
   # python:
   # - "3.5"
+  - docker create --name oms-web ${DOCKER_REPOSITORY} && docker cp ${TRAVIS_BUILD_DIR}/target/OMS.war oms-web:/var/lib/tomcat/webapps/.
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
   - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
