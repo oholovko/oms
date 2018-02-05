@@ -1,11 +1,10 @@
-build-oms:
-  language: java
-  sudo: false
-  jdk:
-    - oraclejdk8
-  script:
-  #- mvn clean install
-    - mvn clean package
+language: java
+sudo: false
+jdk:
+  - oraclejdk8
+script:
+#- mvn clean install
+  - mvn clean package
 # deploy:
 #   provider: s3
 #   access_key_id: AKIAJTNAO3GPLU3O3RMA
@@ -17,9 +16,9 @@ build-oms:
 #   acl: bucket_owner_full_control
 #   on:
 #     repo: oholovko/oms
-# build-image:
-#   sudo: required
-#   services:
-#     - docker
-#   before_install:
-#     - docker --version
+after_success:
+  sudo: required
+  services:
+    - docker
+  before_deploy:
+    - docker --version
