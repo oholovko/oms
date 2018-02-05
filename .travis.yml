@@ -1,25 +1,30 @@
-sudo: required
-dist: trusty
-language: java
+# language: java
 # sudo: false
-jdk:
-- oraclejdk8
+# jdk:
+# - oraclejdk8
+# script:
+# #- mvn clean install
+# - mvn clean package
+# deploy:
+#   provider: s3
+#   access_key_id: AKIAJTNAO3GPLU3O3RMA
+#   secret_access_key:
+#     secure: QE82Vy0rpIle+cbVAR4lR9V9v7f5XV0odwVVeQmMziYW85Wg7NHhE8jfjBB7rKxe69AGBdA+YSpHwWb3XFatYBpv8e1Lp+dxQLidO5SoVZZ4qePWoAjeAUr/7bbwSX2ssNk54JeT/4XLZWHr4S0rMOl8QyCX4V/eJIFtRb4sD+VbejkZFWFAOrGrujZfHVCII7OPyQWxErwW+rNKAdOXO/Ra4R+H9TbnDNnMfJUyxtvP++uVv4019dxCajiCWx3IIcf1OlLqcYxhjVAxf3eXtP0OPyxwqQbLbnAdvIEUkil9HlSzAR++W6nnIBozsSoMhW8bxf7qUFokGIwLx67qZ1uZMSfHMlcaEo1u63WzFloq4Pm+AkCG+KsSsqIQo22ZEMG0gm6qVSFbl1jMgzvyP8uIZ7IW1rmWDwVEYb+VD29EMz8Y+wozSzQM4CiQBnKZMMtEZmPCjzAH64jWuKpUqpKboVbgqjVoaxKljYSPzhJ6UnNrgGMNZUAW7r5p/FPpA4zKu6o5HsWpixKY9E2hNevcgdq0Bn1csuz8xlZa9XeMChH+VGiNurfOGfra50zR05tU4keKdxLK3t+qRwDsra7IOXdUNmI9d1m6M3bB+caxpxLLiJK1ivclKgOwDJiqWl5mdWaPbYciRYQgtXFmtCzJl8W9rOyhjcF/o1Ns2rw=
+#   bucket: "lv285oms-bucket"
+#   skip_cleanup: true
+#   upload-dir: oms
+#   acl: bucket_owner_full_control
+#   on:
+#     repo: oholovko/oms
+
+
+sudo: required
 services:
   - docker
-build-oms:
-#- mvn clean install
-- mvn clean package
-# deploy:
-  # provider: s3
-  # access_key_id: AKIAJTNAO3GPLU3O3RMA
-  # secret_access_key:
-  #   secure: QE82Vy0rpIle+cbVAR4lR9V9v7f5XV0odwVVeQmMziYW85Wg7NHhE8jfjBB7rKxe69AGBdA+YSpHwWb3XFatYBpv8e1Lp+dxQLidO5SoVZZ4qePWoAjeAUr/7bbwSX2ssNk54JeT/4XLZWHr4S0rMOl8QyCX4V/eJIFtRb4sD+VbejkZFWFAOrGrujZfHVCII7OPyQWxErwW+rNKAdOXO/Ra4R+H9TbnDNnMfJUyxtvP++uVv4019dxCajiCWx3IIcf1OlLqcYxhjVAxf3eXtP0OPyxwqQbLbnAdvIEUkil9HlSzAR++W6nnIBozsSoMhW8bxf7qUFokGIwLx67qZ1uZMSfHMlcaEo1u63WzFloq4Pm+AkCG+KsSsqIQo22ZEMG0gm6qVSFbl1jMgzvyP8uIZ7IW1rmWDwVEYb+VD29EMz8Y+wozSzQM4CiQBnKZMMtEZmPCjzAH64jWuKpUqpKboVbgqjVoaxKljYSPzhJ6UnNrgGMNZUAW7r5p/FPpA4zKu6o5HsWpixKY9E2hNevcgdq0Bn1csuz8xlZa9XeMChH+VGiNurfOGfra50zR05tU4keKdxLK3t+qRwDsra7IOXdUNmI9d1m6M3bB+caxpxLLiJK1ivclKgOwDJiqWl5mdWaPbYciRYQgtXFmtCzJl8W9rOyhjcF/o1Ns2rw=
-  # bucket: "lv285oms-bucket"
-  # skip_cleanup: true
-  # upload-dir: oms
-  # acl: bucket_owner_full_control
-  # on:
-  #   repo: oholovko/oms
-docker:
-  - docker pull tomcat:8.0-jre8 || true
-  - docker images
+before_install:
+  - docker --version
+  - echo "ENV GIT_SHA ${TRAVIS_COMMIT}" >> Dockerfile
+install:
+  - docker pull ${DOCKER_REPOSITORY}:last_successful_build || true
+  - docker pull ${DOCKER_REPOSITORY}:${TRAVIS_COMMIT} || true
+  - docker build -t ${DOCKER_REPOSITORY}:${TRAVIS_COMMIT} --pull=true .
