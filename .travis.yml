@@ -21,15 +21,22 @@ script:
 #     repo: oholovko/oms
 after_success:
   - docker --version
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
  # Do AWS login for ECR
   # language: python
   # python:
   # - "3.5"
   - docker create --name oms-web ${DOCKER_REPOSITORY} && docker cp $TRAVIS_BUILD_DIR/target/OMS.war oms-web:/usr/local/tomcat/webapps/. && docker commit oms-web oms-web:latest
-  - pip install --user awscli
-  - export PATH=$PATH:$HOME/.local/bin
-  - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-  - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-  - $(aws ecr get-login --no-include-email --region us-east-2)
-  - docker tag oms-web 851151705021.dkr.ecr.us-east-2.amazonaws.com/repo:latest
-  - docker push 851151705021.dkr.ecr.us-east-2.amazonaws.com/repo:latest
+  - docker tag oms-web:latest $DOCKER_USER/oms-web:latest
+  - docker push $DOCKER_USER/oms-web:latest
+  
+  
+  
+  # - pip install --user awscli
+  # - export PATH=$PATH:$HOME/.local/bin
+  # - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+  # - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+  # - $(aws ecr get-login --no-include-email --region us-east-2)
+  # - docker tag oms-web 851151705021.dkr.ecr.us-east-2.amazonaws.com/repo:latest
+  # - docker push 851151705021.dkr.ecr.us-east-2.amazonaws.com/repo:latest
